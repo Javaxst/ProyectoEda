@@ -151,4 +151,6 @@ public class DoubleLinkedList{
     public boolean isEmpty() { return size == 0; }
     public int getSize()     { return size; }
     public GameEvent getLatest() { return tail != null ? tail.event : null; }
+    
+    
 }

@@ -137,4 +137,37 @@ public class LinkedList {
 
     public boolean isEmpty() { return size == 0; }
     public int getSize()     { return size; }
+    
+        // Selection Sort por nombre del ítem (orden alfabético)
+    public void sortByName() {
+        if (head == null || head.next == null) return; // 0 o 1 elemento, ya está ordenado
+
+        Node sorted = head;
+
+        while (sorted != null) {
+            // encuentra el nodo con el nombre mínimo desde sorted en adelante
+            Node minNode = sorted;
+            Node current = sorted.next;
+
+            while (current != null) {
+                if (current.item.getName()
+                        .compareToIgnoreCase(minNode.item.getName()) < 0) {
+                    minNode = current;
+                }
+                current = current.next;
+            }
+
+            // intercambia el ítem del mínimo con el del nodo sorted
+            // (intercambia datos, no punteros — más limpio en lista enlazada)
+            if (minNode != sorted) {
+                Item temp      = sorted.item;
+                sorted.item    = minNode.item;
+                minNode.item   = temp;
+            }
+
+            sorted = sorted.next;
+        }
+
+        System.out.println("Inventario ordenado alfabéticamente.");
+    }
 }

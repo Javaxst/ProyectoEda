@@ -103,6 +103,20 @@ public class InventorySystem {
             inv.print(); // fallback: imprime todo
         }
     }
+    
+    public void sortInventory(Player player) {
+    if (player.getInventory().isEmpty()) {
+        System.out.println("El inventario esta vacio.");
+        return;
+    }
+    System.out.println("\n── Inventario antes de ordenar ───────────────");
+    player.getInventory().print();
+
+    player.getInventory().sortByName();
+
+    System.out.println("\n── Inventario después de ordenar ─────────────");
+    player.getInventory().print();
+    }
 
     public boolean hasItem(Player player, String itemName) {
         return player.getInventory().contains(itemName);

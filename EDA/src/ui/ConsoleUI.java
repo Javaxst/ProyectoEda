@@ -52,7 +52,7 @@ public class ConsoleUI {
     public String showTravelMenu(MapSystem mapSystem) {
         mapSystem.printMapVisual();
         mapSystem.printAvailableRoutes();
-        System.out.print("  ¿A dónde viajar? (nombre de zona): ");
+        System.out.print("  ¿A donde viajar? (nombre de zona): ");
         return readLine();
     }
 
@@ -62,8 +62,9 @@ public class ConsoleUI {
         inventorySystem.printInventory(player);
         System.out.println("  [1] Usar item");
         System.out.println("  [2] Descartar item");
+        System.out.println("  [3] Ordenar alfabeticamente");  // ← nuevo
         System.out.println("  [0] Volver");
-        System.out.print("  Accion: ");
+        System.out.print("  Acción: ");
         return readInt();
     }
 
@@ -149,7 +150,7 @@ public class ConsoleUI {
     public void showGameOver(Player player) {
         System.out.println("\n====================================");
         System.out.println("             GAME OVER                    ");
-        System.out.println("  " + player.getName() + " ha caído en batalla.");
+        System.out.println("  " + player.getName() + " ha caido en batalla.");
         System.out.println("======================================");
         eventLog.printLast(5);
     }

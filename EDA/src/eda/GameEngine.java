@@ -262,15 +262,16 @@ public class GameEngine {
         int choice = ui.showInventoryMenu(player, inventorySystem);
         switch (choice) {
             case 1 -> {
-                ui.showMessage("¿Que item deseas usar?");
+                ui.showMessage("¿Qué item deseas usar?");
                 String itemName = ui.readLine();
                 inventorySystem.useItem(player, itemName);
             }
             case 2 -> {
-                ui.showMessage("¿Que item deseas descartar?");
+                ui.showMessage("¿Qué item deseas descartar?");
                 String itemName = ui.readLine();
                 inventorySystem.removeItem(player, itemName);
             }
+            case 3 -> inventorySystem.sortInventory(player);  // ← nuevo
             case 0 -> { /* volver */ }
         }
     }
