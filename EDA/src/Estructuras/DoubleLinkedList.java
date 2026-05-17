@@ -43,7 +43,7 @@ public class DoubleLinkedList{
             newNode.prev = tail;
             tail.next    = newNode;
             tail         = newNode;
-            cursor       = tail; // el cursor apunta al evento más reciente
+            cursor       = tail; // el cursor apunta al evento mas reciente
         }
         size++;
     }
@@ -52,11 +52,11 @@ public class DoubleLinkedList{
 
     public GameEvent next() {
         if (cursor == null) {
-            System.out.println("Historial vacío.");
+            System.out.println("Historial vacio.");
             return null;
         }
         if (cursor.next == null) {
-            System.out.println("Ya estás en el evento más reciente.");
+            System.out.println("Ya estas en el evento mas reciente.");
             return cursor.event;
         }
         cursor = cursor.next;
@@ -65,11 +65,11 @@ public class DoubleLinkedList{
 
     public GameEvent prev() {
         if (cursor == null) {
-            System.out.println("Historial vacío.");
+            System.out.println("Historial vacio.");
             return null;
         }
         if (cursor.prev == null) {
-            System.out.println("Ya estás en el primer evento.");
+            System.out.println("Ya estas en el primer evento.");
             return cursor.event;
         }
         cursor = cursor.prev;
@@ -81,7 +81,7 @@ public class DoubleLinkedList{
         return cursor.event;
     }
 
-    // Regresa el cursor al evento más reciente
+    // Regresa el cursor al evento mas reciente
     public void goToLatest() {
         cursor = tail;
     }
@@ -93,57 +93,57 @@ public class DoubleLinkedList{
 
     // ── IMPRESIÓN ──────────────────────────────────────────────────────────────
 
-    // Imprime todos los eventos del más antiguo al más reciente
+    // Imprime todos los eventos del mas antiguo al mas reciente
     public void printForward() {
         if (head == null) {
-            System.out.println("  (historial vacío)");
+            System.out.println("  (historial vacio)");
             return;
         }
-        System.out.println("╔══ Historial de eventos ══════════════════════");
+        System.out.println("=== Historial de eventos =========================");
         Node current = head;
         int  index   = 1;
         while (current != null) {
-            String marker = (current == cursor) ? " ◄" : "";
+            String marker = (current == cursor) ? " <--" : "";
             System.out.println("║ " + index + ". " + current.event.getSummary() + marker);
             current = current.next;
             index++;
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
-    // Imprime del más reciente al más antiguo
+    // Imprime del mas reciente al mas antiguo
     public void printBackward() {
         if (tail == null) {
-            System.out.println("  (historial vacío)");
+            System.out.println("  (historial vacio)");
             return;
         }
-        System.out.println("╔══ Historial (reciente → antiguo) ═══════════");
+        System.out.println("=== Historial (reciente --> antiguo) ==============");
         Node current = tail;
         int  index   = size;
         while (current != null) {
-            String marker = (current == cursor) ? " ◄" : "";
-            System.out.println("║ " + index + ". " + current.event.getSummary() + marker);
+            String marker = (current == cursor) ? " <--" : "";
+            System.out.println(" " + index + ". " + current.event.getSummary() + marker);
             current = current.prev;
             index--;
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
-    // Imprime solo los últimos N eventos
+    // Imprime solo los ultimos N eventos
     public void printLast(int n) {
         if (head == null) {
-            System.out.println("  (historial vacío)");
+            System.out.println("  (historial vacio)");
             return;
         }
-        System.out.println("╔══ Últimos " + n + " eventos ═══════════════════════");
+        System.out.println("=== ultimos " + n + " eventos =========================");
         Node current = tail;
         int  count   = 0;
         while (current != null && count < n) {
-            System.out.println("║ • " + current.event.getSummary());
+            System.out.println(" * " + current.event.getSummary());
             current = current.prev;
             count++;
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     // ── UTILIDADES ─────────────────────────────────────────────────────────────
@@ -151,4 +151,6 @@ public class DoubleLinkedList{
     public boolean isEmpty() { return size == 0; }
     public int getSize()     { return size; }
     public GameEvent getLatest() { return tail != null ? tail.event : null; }
+    
+    
 }

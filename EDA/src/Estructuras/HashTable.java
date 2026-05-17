@@ -124,7 +124,7 @@ public class HashTable {
         buckets  = new Node[capacity];
         size     = 0;
 
-        System.out.println("[HashTable] Rehash: " + oldCapacity + " → " + capacity + " buckets");
+        System.out.println("[HashTable] Rehash: " + oldCapacity + " --> " + capacity + " buckets");
 
         for (int i = 0; i < oldCapacity; i++) {
             Node current = oldBuckets[i];
@@ -139,10 +139,10 @@ public class HashTable {
 
     public void print() {
         if (size == 0) {
-            System.out.println("  (tabla vacía)");
+            System.out.println("  (tabla vacia)");
             return;
         }
-        System.out.println("╔══ HashTable (" + size + " entradas, " + capacity + " buckets) ════");
+        System.out.println("===== HashTable (" + size + " entradas, " + capacity + " buckets) ====");
         for (int i = 0; i < capacity; i++) {
             if (buckets[i] != null) {
                 System.out.print("║ [" + i + "] ");
@@ -151,15 +151,15 @@ public class HashTable {
                     if (current.value instanceof Item) {
                         System.out.print(((Item) current.value).getInfo());
                     } else {
-                        System.out.print(current.key + " → " + current.value);
+                        System.out.print(current.key + " --> " + current.value);
                     }
-                    if (current.next != null) System.out.print("  ⟶  ");
+                    if (current.next != null) System.out.print("  --->  ");
                     current = current.next;
                 }
                 System.out.println();
             }
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
         System.out.printf("  Factor de carga actual: %.2f%n", (double) size / capacity);
     }
 

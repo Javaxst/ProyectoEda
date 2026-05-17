@@ -25,7 +25,7 @@ public class Player extends Entity {
     public void takeDamage(int damage) {
         int damageTaken = Math.max(1, damage - defense);
         setHealth(health - damageTaken);
-        System.out.println(name + " recibe " + damageTaken + " de daño. HP: " + health + "/" + maxHealth);
+        System.out.println(name + " recibe " + damageTaken + " de dano. HP: " + health + "/" + maxHealth);
     }
 
     public void gainExperience(int exp) {
@@ -42,7 +42,7 @@ public class Player extends Entity {
         attack     += 5;
         defense    += 3;
         health      = maxHealth; // HP completo al subir de nivel
-        System.out.println("*** " + name + " subió al nivel " + level + "! ***");
+        System.out.println("*** " + name + " subio al nivel " + level + "! ***");
     }
 
     public void addItem(Item item) {
@@ -61,7 +61,7 @@ public class Player extends Entity {
 
     public void addQuest(Quest quest) {
         questLog.enqueue(quest);
-        System.out.println("Nueva misión aceptada: " + quest.getName());
+        System.out.println("Nueva Mision aceptada: " + quest.getName());
     }
 
     public Quest getNextQuest() {

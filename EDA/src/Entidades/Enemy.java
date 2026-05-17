@@ -27,10 +27,10 @@ public class Enemy extends Entity {
     public void takeDamage(int damage) {
         int damageTaken = Math.max(1, damage - defense);
         setHealth(health - damageTaken);
-        System.out.println(name + " recibe " + damageTaken + " de daño. HP: " + health + "/" + maxHealth);
+        System.out.println(name + " recibe " + damageTaken + " de dano. HP: " + health + "/" + maxHealth);
     }
 
-    // La IA del enemigo elige una acción según su HP restante
+    // La IA del enemigo elige una Accion según su HP restante
     public String getAIAction() {
         double hpPercent = (double) health / maxHealth;
         if (type == EnemyType.BOSS && hpPercent < 0.3) {

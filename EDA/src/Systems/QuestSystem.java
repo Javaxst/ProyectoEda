@@ -45,7 +45,7 @@ public class QuestSystem {
             "Explora la Cueva del Norte y regresa con pruebas.",
             300, 150));
         availableQuests.enqueue(new Quest(
-            "El último guardián",
+            "El ultimo guardian",
             "Derrota al jefe de la Fortaleza Roja.",
             800, 500));
         availableQuests.enqueue(new Quest(
@@ -69,16 +69,16 @@ public class QuestSystem {
         activeQuests.enqueue(quest);
         player.addQuest(quest);
 
-        System.out.println("\n╔══ Nueva misión aceptada ══════════════════════");
+        System.out.println("\n=== Nueva Mision aceptada =========================");
         System.out.println("║  " + quest.getSummary());
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
 
-        logEvent("Aceptó misión: " + quest.getName(), EventType.QUEST, player.getName());
+        logEvent("Acepto Mision: " + quest.getName(), EventType.QUEST, player.getName());
         return true;
     }
 
     public boolean acceptQuestByName(Player player, String questName) {
-        // busca la misión específica en la cola de disponibles
+        // busca la Mision específica en la cola de disponibles
         int size = availableQuests.getSize();
         for (int i = 0; i < size; i++) {
             Quest quest = (Quest) availableQuests.dequeue();
@@ -86,14 +86,14 @@ public class QuestSystem {
                 quest.start();
                 activeQuests.enqueue(quest);
                 player.addQuest(quest);
-                System.out.println("Misión aceptada: " + quest.getName());
-                logEvent("Aceptó misión: " + quest.getName(), EventType.QUEST, player.getName());
+                System.out.println("Mision aceptada: " + quest.getName());
+                logEvent("Acepto Mision: " + quest.getName(), EventType.QUEST, player.getName());
                 return true;
             }
             // si no es la que buscamos la volvemos a encolar
             availableQuests.enqueue(quest);
         }
-        System.out.println("Misión '" + questName + "' no encontrada.");
+        System.out.println("Mision '" + questName + "' no encontrada.");
         return false;
     }
 
@@ -110,19 +110,19 @@ public class QuestSystem {
                 player.earnGold(quest.getGoldReward());
                 totalCompleted++;
 
-                System.out.println("\n╔══ ¡Misión completada! ════════════════════════");
+                System.out.println("\n=== Mision completada! =========================══");
                 System.out.println("║  " + quest.getSummary());
                 System.out.println("║  EXP ganada : +" + quest.getExpReward());
                 System.out.println("║  Oro ganado : +" + quest.getGoldReward());
-                System.out.println("╚═════════════════════════════════════════════");
+                System.out.println("==============================================");
 
-                logEvent("Completó misión: " + quest.getName(), EventType.QUEST, player.getName());
+                logEvent("Completó Mision: " + quest.getName(), EventType.QUEST, player.getName());
                 return true;
             }
             // si no es la que buscamos la volvemos a encolar
             activeQuests.enqueue(quest);
         }
-        System.out.println("Misión '" + questName + "' no está activa.");
+        System.out.println("Mision '" + questName + "' no esta activa.");
         return false;
     }
 
@@ -134,48 +134,48 @@ public class QuestSystem {
                 quest.fail();
                 totalFailed++;
 
-                System.out.println("\n╔══ Misión fallida ══════════════════════════");
+                System.out.println("\n=== Mision fallida =========================════");
                 System.out.println("║  " + quest.getSummary());
-                System.out.println("╚═════════════════════════════════════════════");
+                System.out.println("==============================================");
 
-                logEvent("Falló misión: " + quest.getName(), EventType.QUEST, player.getName());
+                logEvent("Fallo Mision: " + quest.getName(), EventType.QUEST, player.getName());
                 return true;
             }
             activeQuests.enqueue(quest);
         }
-        System.out.println("Misión '" + questName + "' no está activa.");
+        System.out.println("Mision '" + questName + "' no esta activa.");
         return false;
     }
 
     // ── IMPRESIÓN ──────────────────────────────────────────────────────────────
 
     public void printAvailable() {
-        System.out.println("\n╔══ Misiones disponibles (" + availableQuests.getSize() + ") ════════════");
+        System.out.println("\n=== Misiones disponibles (" + availableQuests.getSize() + ") =============");
         if (availableQuests.isEmpty()) {
             System.out.println("║  (ninguna disponible)");
         } else {
             availableQuests.print();
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     public void printActive() {
-        System.out.println("\n╔══ Misiones activas (" + activeQuests.getSize() + ") ═══════════════");
+        System.out.println("\n=== Misiones activas (" + activeQuests.getSize() + ") ===============");
         if (activeQuests.isEmpty()) {
             System.out.println("║  (ninguna activa)");
         } else {
             activeQuests.print();
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     public void printHistory() {
-        System.out.println("\n╔══ Historial de misiones ══════════════════════");
-        System.out.println("║  Completadas : " + totalCompleted);
-        System.out.println("║  Fallidas    : " + totalFailed);
-        System.out.println("╠══════════════════════════════════════════════");
+        System.out.println("\n=== Historial de misiones =========================");
+        System.out.println("  Completadas : " + totalCompleted);
+        System.out.println("  Fallidas    : " + totalFailed);
+        System.out.println("==================================================══");
         completedQuests.printForward();
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     public void printQuestLog() {

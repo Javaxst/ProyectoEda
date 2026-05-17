@@ -26,7 +26,7 @@ public class CharacterArray {
         return true;
     }
 
-    // ── ACCESO POR ÍNDICE ──────────────────────────────────────────────────────
+    // ── ACCESO POR Indice ──────────────────────────────────────────────────────
 
     public Entity get(int index) {
         if (!isValidIndex(index)) return null;
@@ -110,18 +110,18 @@ public class CharacterArray {
             System.out.println("No hay personajes registrados.");
             return;
         }
-        System.out.println("╔══ Personajes (" + size + "/" + capacity + ") ═══════════════════════");
+        System.out.println("=== Personajes (" + size + "/" + capacity + ") =========================");
         for (int i = 0; i < size; i++) {
             System.out.println("║ [" + i + "] " + characters[i].getStats());
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     // ── UTILIDADES ─────────────────────────────────────────────────────────────
 
     private boolean isValidIndex(int index) {
         if (index < 0 || index >= size) {
-            System.out.println("Índice " + index + " fuera de rango. Tamaño actual: " + size);
+            System.out.println("Indice " + index + " fuera de rango. Tamaño actual: " + size);
             return false;
         }
         return true;

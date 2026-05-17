@@ -40,7 +40,7 @@ public class Stack {
 
     public Action pop() {
         if (isEmpty()) {
-            System.out.println("La pila está vacía.");
+            System.out.println("La pila esta vacia.");
             return null;
         }
         Action action = top.data;
@@ -51,7 +51,7 @@ public class Stack {
 
     public Action peek() {
         if (isEmpty()) {
-            System.out.println("La pila está vacía.");
+            System.out.println("La pila esta vacia.");
             return null;
         }
         return top.data;
@@ -61,10 +61,10 @@ public class Stack {
 
     public void print() {
         if (isEmpty()) {
-            System.out.println("  (pila vacía)");
+            System.out.println("  (pila vacia)");
             return;
         }
-        System.out.println("╔══ Pila de acciones (tope → fondo) ══════════");
+        System.out.println("=== Pila de acciones (tope --> fondo) ===========═");
         Node current = top;
         int  index   = size;
         while (current != null) {
@@ -72,7 +72,7 @@ public class Stack {
             current = current.next;
             index--;
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     // ── UTILIDADES ─────────────────────────────────────────────────────────────

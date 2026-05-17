@@ -28,10 +28,10 @@ public class CombatSystem {
 
     public void startCombat(Player player, Enemy enemy) {
         combatActive = true;
-        System.out.println("\n╔══════════════════════════════════════════════");
-        System.out.println("║  ⚔  COMBATE INICIADO");
-        System.out.println("║  " + player.getName() + "  vs  " + enemy.getName());
-        System.out.println("╚══════════════════════════════════════════════\n");
+        System.out.println("\n=====================================================");
+        System.out.println("    COMBATE INICIADO");
+        System.out.println("  " + player.getName() + "  vs  " + enemy.getName());
+        System.out.println("==============================================\n");
 
         logEvent("Combate iniciado contra " + enemy.getName(), EventType.COMBAT, player.getName());
 
@@ -52,9 +52,9 @@ public class CombatSystem {
         System.out.println("── Tu turno ──────────────────────────────────");
         System.out.println("  [1] Atacar");
         System.out.println("  [2] Defenderse");
-        System.out.println("  [3] Usar poción");
+        System.out.println("  [3] Usar Pocion");
         System.out.println("  [4] Huir");
-        System.out.print("  Acción: ");
+        System.out.print("  Accion: ");
 
         int choice = readInput();
 
@@ -64,7 +64,7 @@ public class CombatSystem {
             case 3 -> executeUsePotion(player);
             case 4 -> executeFlee(player, enemy);
             default -> {
-                System.out.println("  Opción inválida. Pierdes el turno.");
+                System.out.println("  Opcion invalida. Pierdes el turno.");
                 logEvent(player.getName() + " perdió su turno", EventType.COMBAT, player.getName());
             }
         }
@@ -106,15 +106,15 @@ public class CombatSystem {
     }
 
     private void executeUsePotion(Player player) {
-        Item potion = player.getInventory().find("Poción de Vida");
+        Item potion = player.getInventory().find("Pocion de Vida");
         if (potion == null) {
             System.out.println("  No tienes pociones en el inventario.");
             return;
         }
         int healAmount = potion.getStatBonus();
         player.setHealth(player.getHealth() + healAmount);
-        player.removeItem("Poción de Vida");
-        System.out.println("  Usaste Poción de Vida. HP restaurado: +" + healAmount);
+        player.removeItem("Pocion de Vida");
+        System.out.println("  Usaste Pocion de Vida. HP restaurado: +" + healAmount);
 
         Action action = new Action(ActionType.USE_ITEM, player.getName(), player.getName(), healAmount);
         actionStack.push(action);
@@ -128,12 +128,12 @@ public class CombatSystem {
         actionStack.push(action);
 
         if (success) {
-            System.out.println("  ¡Huiste exitosamente!");
+            System.out.println("  Huiste exitosamente!");
             logEvent(player.getName() + " huyó del combate", EventType.COMBAT, player.getName());
             combatActive = false;
         } else {
             System.out.println("  No pudiste huir.");
-            logEvent(player.getName() + " intentó huir y falló", EventType.COMBAT, player.getName());
+            logEvent(player.getName() + " intento huir y fallo", EventType.COMBAT, player.getName());
         }
     }
 
@@ -159,14 +159,14 @@ public class CombatSystem {
 
     private void endCombat(Player player, Enemy enemy) {
         combatActive = false;
-        System.out.println("\n╔══════════════════════════════════════════════");
+        System.out.println("\n=====================================================");
 
         if (!player.isAlive()) {
-            System.out.println("║  💀  DERROTA — " + player.getName() + " fue derrotado.");
+            System.out.println("    DERROTA — " + player.getName() + " fue derrotado.");
             logEvent("Derrota contra " + enemy.getName(), EventType.COMBAT, player.getName());
 
         } else if (!enemy.isAlive()) {
-            System.out.println("║  ✓  VICTORIA — " + enemy.getName() + " derrotado.");
+            System.out.println("    VICTORIA — " + enemy.getName() + " derrotado.");
             player.gainExperience(enemy.getExpReward());
             player.earnGold(enemy.getGoldReward());
 
@@ -176,7 +176,7 @@ public class CombatSystem {
             logEvent("Victoria contra " + enemy.getName(), EventType.COMBAT, player.getName());
         }
 
-        System.out.println("╚══════════════════════════════════════════════");
+        System.out.println("==============================================═");
         System.out.println("\n── Resumen del combate ───────────────────────");
         actionStack.print();
     }

@@ -20,7 +20,7 @@ public class InventorySystem {
         this.eventLog = eventLog;
     }
 
-    // ── GESTIÓN DE ÍTEMS ───────────────────────────────────────────────────────
+    // ── GESTIÓN DE itemS ───────────────────────────────────────────────────────
 
     public void addItem(Player player, Item item) {
         player.addItem(item);
@@ -29,16 +29,16 @@ public class InventorySystem {
 
     public boolean removeItem(Player player, String itemName) {
         boolean removed = player.removeItem(itemName);
-        if (removed) logEvent("Descartó: " + itemName, EventType.ITEM, player.getName());
+        if (removed) logEvent("Descarto: " + itemName, EventType.ITEM, player.getName());
         return removed;
     }
 
-    // ── USO DE ÍTEMS ───────────────────────────────────────────────────────────
+    // ── USO DE itemS ───────────────────────────────────────────────────────────
 
     public boolean useItem(Player player, String itemName) {
         Item item = player.getInventory().find(itemName);
         if (item == null) {
-            System.out.println("'" + itemName + "' no está en el inventario.");
+            System.out.println("'" + itemName + "' no esta en el inventario.");
             return false;
         }
 
@@ -49,17 +49,17 @@ public class InventorySystem {
                 player.removeItem(itemName);
                 System.out.println("Usaste " + itemName + ". HP restaurado: +" + healAmount
                     + " (" + player.getHealth() + "/" + player.getMaxHealth() + ")");
-                logEvent("Usó " + itemName + " (+" + healAmount + " HP)", EventType.ITEM, player.getName());
+                logEvent("uso " + itemName + " (+" + healAmount + " HP)", EventType.ITEM, player.getName());
                 return true;
             }
             case WEAPON -> {
                 System.out.println("Equipaste " + itemName + ". ATK +" + item.getStatBonus());
-                logEvent("Equipó " + itemName, EventType.ITEM, player.getName());
+                logEvent("Equipo " + itemName, EventType.ITEM, player.getName());
                 return true;
             }
             case ARMOR -> {
                 System.out.println("Equipaste " + itemName + ". DEF +" + item.getStatBonus());
-                logEvent("Equipó " + itemName, EventType.ITEM, player.getName());
+                logEvent("Equipo " + itemName, EventType.ITEM, player.getName());
                 return true;
             }
             case KEY_ITEM -> {
@@ -67,7 +67,7 @@ public class InventorySystem {
                 return false;
             }
             default -> {
-                System.out.println("No puedes usar ese ítem.");
+                System.out.println("No puedes usar ese item.");
                 return false;
             }
         }
@@ -76,15 +76,15 @@ public class InventorySystem {
     // ── INSPECCIÓN ─────────────────────────────────────────────────────────────
 
     public void printInventory(Player player) {
-        System.out.println("\n╔══ Inventario de " + player.getName()
-            + " (" + player.getInventory().getSize() + " ítems) ══════");
+        System.out.println("\n=== Inventario de " + player.getName()
+            + " (" + player.getInventory().getSize() + " items) ══════");
         player.printInventory();
         System.out.println("  Oro disponible: " + player.getGold());
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     public void printItemsByType(Player player, ItemType type) {
-        System.out.println("\n── Ítems de tipo " + type + " ─────────────────────");
+        System.out.println("\n── items de tipo " + type + " ─────────────────────");
         Estructuras.LinkedList inv = player.getInventory();
 
         // recorre la lista enlazada buscando el tipo
@@ -102,6 +102,20 @@ public class InventorySystem {
         if (!found) {
             inv.print(); // fallback: imprime todo
         }
+    }
+    
+    public void sortInventory(Player player) {
+    if (player.getInventory().isEmpty()) {
+        System.out.println("El inventario esta vacio.");
+        return;
+    }
+    System.out.println("\n── Inventario antes de ordenar ───────────────");
+    player.getInventory().print();
+
+    player.getInventory().sortByName();
+
+    System.out.println("\n── Inventario después de ordenar ─────────────");
+    player.getInventory().print();
     }
 
     public boolean hasItem(Player player, String itemName) {
