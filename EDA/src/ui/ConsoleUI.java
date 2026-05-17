@@ -27,23 +27,23 @@ public class ConsoleUI {
     // ── MENÚ PRINCIPAL ─────────────────────────────────────────────────────────
 
     public int showMainMenu(Player player, Zone currentZone) {
-        System.out.println("\n╔══════════════════════════════════════════════");
-        System.out.println("║  " + player.getName()
+        System.out.println("\n=====================================");
+        System.out.println("|  " + player.getName()
             + "  |  Nv." + player.getLevel()
             + "  |  HP:" + player.getHealth() + "/" + player.getMaxHealth()
             + "  |  Oro:" + player.getGold());
-        System.out.println("║  Zona: " + currentZone.getName()
+        System.out.println("|  Zona: " + currentZone.getName()
             + "  [" + currentZone.getType() + "]");
-        System.out.println("╠══════════════════════════════════════════════");
-        System.out.println("║  [1] Explorar zona");
-        System.out.println("║  [2] Viajar");
-        System.out.println("║  [3] Inventario");
-        System.out.println("║  [4] Misiones");
-        System.out.println("║  [5] Historial de eventos");
-        System.out.println("║  [6] Ver estadísticas");
-        System.out.println("║  [0] Salir");
-        System.out.println("╚══════════════════════════════════════════════");
-        System.out.print("  Acción: ");
+        System.out.println("======================================");
+        System.out.println("|  [1] Explorar zona");                 
+        System.out.println("|  [2] Viajar");
+        System.out.println("|  [3] Inventario");
+        System.out.println("|  [4] Misiones");
+        System.out.println("|  [5] Historial de eventos");
+        System.out.println("|  [6] Ver estadísticas");
+        System.out.println("|  [0] Salir");
+        System.out.println("======================================");
+        System.out.print("  Accion: ");
         return readInt();
     }
 
@@ -60,10 +60,10 @@ public class ConsoleUI {
 
     public int showInventoryMenu(Player player, InventorySystem inventorySystem) {
         inventorySystem.printInventory(player);
-        System.out.println("  [1] Usar ítem");
-        System.out.println("  [2] Descartar ítem");
+        System.out.println("  [1] Usar item");
+        System.out.println("  [2] Descartar item");
         System.out.println("  [0] Volver");
-        System.out.print("  Acción: ");
+        System.out.print("  Accion: ");
         return readInt();
     }
 
@@ -71,10 +71,10 @@ public class ConsoleUI {
 
     public int showQuestMenu(QuestSystem questSystem) {
         questSystem.printQuestLog();
-        System.out.println("  [1] Aceptar misión");
+        System.out.println("  [1] Aceptar Mision");
         System.out.println("  [2] Ver historial");
         System.out.println("  [0] Volver");
-        System.out.print("  Acción: ");
+        System.out.print("  Accion: ");
         return readInt();
     }
 
@@ -86,24 +86,24 @@ public class ConsoleUI {
         System.out.println("  [1] Comprar");
         System.out.println("  [2] Vender");
         System.out.println("  [0] Salir de la tienda");
-        System.out.print("  Acción: ");
+        System.out.print("  Accion: ");
         return readInt();
     }
 
-    // ── MENÚ DE EXPLORACIÓN ────────────────────────────────────────────────────
+    // ── MENÚ DE Exploracion ────────────────────────────────────────────────────
 
     public int showExploreMenu(Zone currentZone) {
-        System.out.println("\n╔══ Explorando: " + currentZone.getName() + " ══════════════");
-        System.out.println("║  " + currentZone.getDescription());
-        System.out.println("╠══════════════════════════════════════════════");
-        System.out.println("║  [1] Buscar enemigos");
-        System.out.println("║  [2] Buscar ítems");
-        System.out.println("║  [3] Buscar NPC");
-        System.out.println("║  [4] Ver rutas desde aquí (BFS)");
-        System.out.println("║  [5] Ver caminos más cortos (Dijkstra)");
-        System.out.println("║  [0] Volver");
-        System.out.println("╚══════════════════════════════════════════════");
-        System.out.print("  Acción: ");
+        System.out.println("\n== Explorando: " + currentZone.getName() + " ========");
+        System.out.println("  " + currentZone.getDescription());
+        System.out.println("======================================");
+        System.out.println("  [1] Buscar enemigos");
+        System.out.println("  [2] Buscar items");
+        System.out.println("  [3] Buscar NPC");
+        System.out.println("  [4] Ver rutas desde aquí (BFS)");
+        System.out.println("  [5] Ver caminos mas cortos (Dijkstra)");
+        System.out.println("  [0] Volver");
+        System.out.println("=====================================");
+        System.out.print("  Accion: ");
         return readInt();
     }
 
@@ -112,17 +112,17 @@ public class ConsoleUI {
     public void showEventLog() {
         eventLog.printForward();
         System.out.println("  [N] Siguiente  [P] Anterior  [Q] Salir");
-        System.out.print("  Navegación: ");
+        System.out.print("  Navegacion: ");
         String input = readLine().toUpperCase();
         switch (input) {
             case "N" -> {
                 eventLog.next();
-                System.out.println("  → " + (eventLog.current() != null
+                System.out.println("  --> " + (eventLog.current() != null
                     ? eventLog.current().getSummary() : "(fin)"));
             }
             case "P" -> {
                 eventLog.prev();
-                System.out.println("  → " + (eventLog.current() != null
+                System.out.println("  --> " + (eventLog.current() != null
                     ? eventLog.current().getSummary() : "(inicio)"));
             }
             default -> { /* volver */ }
@@ -132,35 +132,35 @@ public class ConsoleUI {
     // ── PANTALLAS ESPECIALES ───────────────────────────────────────────────────
 
     public void showWelcome() {
-        System.out.println("╔══════════════════════════════════════════════");
-        System.out.println("║                                              ");
-        System.out.println("║         ⚔  CHRONICLES OF DATA  ⚔            ");
-        System.out.println("║      Un RPG construido con estructuras       ");
-        System.out.println("║                                              ");
-        System.out.println("╚══════════════════════════════════════════════");
+        System.out.println("=====================================");
+        System.out.println("                                              ");
+        System.out.println("           CHRONICLES OF DATA              ");
+        System.out.println("      Un RPG construido con estructuras       ");
+        System.out.println("                 de datos                         ");
+        System.out.println("=====================================");
         System.out.println();
     }
 
     public String askPlayerName() {
-        System.out.print("  Ingresa el nombre de tu héroe: ");
+        System.out.print("  Ingresa el nombre de tu heroe: ");
         return readLine();
     }
 
     public void showGameOver(Player player) {
-        System.out.println("\n╔══════════════════════════════════════════════");
-        System.out.println("║           💀  GAME OVER  💀                  ");
-        System.out.println("║  " + player.getName() + " ha caído en batalla.");
-        System.out.println("╚══════════════════════════════════════════════");
+        System.out.println("\n====================================");
+        System.out.println("             GAME OVER                    ");
+        System.out.println("  " + player.getName() + " ha caído en batalla.");
+        System.out.println("======================================");
         eventLog.printLast(5);
     }
 
     public void showVictory(Player player) {
-        System.out.println("\n╔══════════════════════════════════════════════");
-        System.out.println("║           ★  VICTORIA  ★                    ");
-        System.out.println("║  " + player.getName() + " ha completado su aventura.");
-        System.out.println("║  Nivel final  : " + player.getLevel());
-        System.out.println("║  Oro total    : " + player.getGold());
-        System.out.println("╚══════════════════════════════════════════════");
+        System.out.println("\n====================================");
+        System.out.println("             VICTORIA                      ");
+        System.out.println("  " + player.getName() + " ha completado su aventura.");
+        System.out.println("  Nivel final  : " + player.getLevel());
+        System.out.println("  Oro total    : " + player.getGold());
+        System.out.println("======================================");
     }
 
     public void showMessage(String message) {

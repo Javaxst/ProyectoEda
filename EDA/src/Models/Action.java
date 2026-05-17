@@ -10,7 +10,7 @@ public class Action {
     private ActionType type;
     private String     actorName;
     private String     targetName;
-    private int        value;      // daño, curación, etc.
+    private int        value;      // dano, curación, etc.
 
     public Action(ActionType type, String actorName, String targetName, int value) {
         this.type       = type;
@@ -28,9 +28,9 @@ public class Action {
         return switch (type) {
             case ATTACK   -> actorName + " atacó a " + targetName + " por " + value;
             case DEFEND   -> actorName + " se defendió";
-            case USE_ITEM -> actorName + " usó un ítem en " + targetName + " (+" + value + ")";
+            case USE_ITEM -> actorName + " uso un item en " + targetName + " (+" + value + ")";
             case FLEE     -> actorName + " intentó huir";
-            case SPECIAL  -> actorName + " usó habilidad especial contra " + targetName + " por " + value;
+            case SPECIAL  -> actorName + " uso habilidad especial contra " + targetName + " por " + value;
         };
     }
 

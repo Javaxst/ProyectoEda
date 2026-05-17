@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package eda;
 import Entidades.Player;
 import Entidades.Enemy;
@@ -51,12 +48,12 @@ public class GameEngine {
     public void start() {
         ui.showWelcome();
         String name = ui.askPlayerName();
-        player = new Player(name.isEmpty() ? "Héroe" : name);
+        player = new Player(name.isEmpty() ? "Heroe" : name);
         characters.add(player);
 
-        // ítem inicial
+        // item inicial
         inventorySystem.addItem(player,
-            new Item("Poción de Vida", "Restaura 30 HP", ItemType.POTION, 20, 30));
+            new Item("Pocion de Vida", "Restaura 30 HP", ItemType.POTION, 20, 30));
 
         // construir mundo y poblar NPCs
         mapSystem.buildWorld();
@@ -72,18 +69,18 @@ public class GameEngine {
         NPC merchant = new NPC("Gareth",
             "Mercader",
             new String[]{
-                "¡Buenos días! Tengo lo mejor del reino.",
+                "¡Buenos dias! Tengo lo mejor del reino.",
                 "Compra algo, anda.",
-                "Mis precios son los más justos."
+                "Mis precios son los mas justos."
             },
             true);
 
         shopSystem.stockNPC(merchant,
-            "Poción de Vida", "Poción Mayor",
+            "Pocion de Vida", "Pocion Mayor",
             "Espada Corta",   "Armadura de Cuero");
 
         NPC guide = new NPC("Lyra",
-            "Guía",
+            "Guia",
             new String[]{
                 "El Bosque Oscuro es peligroso de noche.",
                 "En las Ruinas dicen que hay tesoros...",
@@ -111,9 +108,9 @@ public class GameEngine {
                 case 6 -> System.out.println("\n" + player.getStats());
                 case 0 -> {
                     running = false;
-                    ui.showMessage("Hasta la próxima aventura, " + player.getName() + ".");
+                    ui.showMessage("Hasta la proxima aventura, " + player.getName() + ".");
                 }
-                default -> ui.showMessage("Opción inválida.");
+                default -> ui.showMessage("Opcion invalida.");
             }
 
             if (!player.isAlive()) {
@@ -124,7 +121,7 @@ public class GameEngine {
         ui.close();
     }
 
-    // ── EXPLORACIÓN ────────────────────────────────────────────────────────────
+    // ── Exploracion ────────────────────────────────────────────────────────────
 
     private void handleExplore() {
         Zone currentZone = mapSystem.getCurrentZone();
@@ -137,7 +134,7 @@ public class GameEngine {
             case 4 -> mapSystem.exploreFromCurrent();
             case 5 -> mapSystem.showShortestPaths();
             case 0 -> { /* volver */ }
-            default -> ui.showMessage("Opción inválida.");
+            default -> ui.showMessage("Opcion invalida.");
         }
     }
 
@@ -157,7 +154,7 @@ public class GameEngine {
         combatSystem.startCombat(player, enemy);
         characters.removeByName(enemy.getName());
 
-        // completa misión si aplica
+        // completa Mision si aplica
         if (!enemy.isAlive()) checkQuestProgress(enemy);
     }
 
@@ -168,7 +165,7 @@ public class GameEngine {
                 new Item("Colmillo", "Diente de lobo", ItemType.KEY_ITEM, 5, 0));
             case DUNGEON -> new Enemy("Goblin Guerrero", 55, 14, 6,
                 3, EnemyType.ELITE, 150, 50,
-                new Item("Poción de Vida", "Restaura 30 HP", ItemType.POTION, 20, 30));
+                new Item("Pocion de Vida", "Restaura 30 HP", ItemType.POTION, 20, 30));
             case BOSS_ROOM -> new Enemy("Señor de la Fortaleza", 200, 30, 15,
                 8, EnemyType.BOSS, 800, 500,
                 new Item("Llave Antigua", "Abre una puerta sellada", ItemType.KEY_ITEM, 0, 0));
@@ -182,17 +179,17 @@ public class GameEngine {
             questSystem.completeQuest(player, "El lobo del norte");
         }
         if (enemy.getName().equals("Señor de la Fortaleza")
-                && questSystem.hasActiveQuest("El último guardián")) {
-            questSystem.completeQuest(player, "El último guardián");
+                && questSystem.hasActiveQuest("El ultimo guardian")) {
+            questSystem.completeQuest(player, "El ultimo guardian");
             ui.showVictory(player);
             running = false;
         }
     }
 
-    // ── ÍTEMS EN ZONA ──────────────────────────────────────────────────────────
+    // ── itemS EN ZONA ──────────────────────────────────────────────────────────
 
     private void handleFindItem() {
-        // probabilidad de encontrar ítem según tipo de zona
+        // probabilidad de encontrar item según tipo de zona
         double chance = switch (mapSystem.getCurrentZone().getType()) {
             case DUNGEON   -> 0.6;
             case FIELD     -> 0.4;
@@ -201,7 +198,7 @@ public class GameEngine {
         };
 
         if (Math.random() < chance) {
-            Item found = shopSystem.getFromCatalog("Poción de Vida");
+            Item found = shopSystem.getFromCatalog("Pocion de Vida");
             inventorySystem.addItem(player, found);
             ui.showMessage("¡Encontraste: " + found.getName() + "!");
         } else {
@@ -227,12 +224,12 @@ public class GameEngine {
             int choice = ui.showShopMenu(npc, player, shopSystem);
             switch (choice) {
                 case 1 -> {
-                    ui.showMessage("¿Qué deseas comprar?");
+                    ui.showMessage("¿Que deseas comprar?");
                     String itemName = ui.readLine();
                     shopSystem.buyItem(player, npc, itemName);
                 }
                 case 2 -> {
-                    ui.showMessage("¿Qué deseas vender?");
+                    ui.showMessage("¿Que deseas vender?");
                     String itemName = ui.readLine();
                     shopSystem.sellItem(player, npc, itemName);
                 }
@@ -242,7 +239,7 @@ public class GameEngine {
     }
 
     private NPC findNPCInZone(Zone zone) {
-        // el mercader está en el mercado, la guía en la aldea
+        // el mercader esta en el mercado, la guía en la aldea
         return switch (zone.getType()) {
             case SHOP -> (NPC) characters.findByName("Gareth");
             case TOWN -> (NPC) characters.findByName("Lyra");
@@ -255,7 +252,7 @@ public class GameEngine {
     private void handleTravel() {
         String destination = ui.showTravelMenu(mapSystem);
         if (!mapSystem.moveTo(destination)) {
-            ui.showMessage("No puedes ir ahí desde aquí.");
+            ui.showMessage("No puedes ir ahi desde aqui.");
         }
     }
 
@@ -265,12 +262,12 @@ public class GameEngine {
         int choice = ui.showInventoryMenu(player, inventorySystem);
         switch (choice) {
             case 1 -> {
-                ui.showMessage("¿Qué ítem deseas usar?");
+                ui.showMessage("¿Que item deseas usar?");
                 String itemName = ui.readLine();
                 inventorySystem.useItem(player, itemName);
             }
             case 2 -> {
-                ui.showMessage("¿Qué ítem deseas descartar?");
+                ui.showMessage("¿Que item deseas descartar?");
                 String itemName = ui.readLine();
                 inventorySystem.removeItem(player, itemName);
             }

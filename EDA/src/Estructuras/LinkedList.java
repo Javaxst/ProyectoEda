@@ -58,13 +58,13 @@ public class LinkedList {
             }
             current = current.next;
         }
-        System.out.println("'" + itemName + "' no está en el inventario.");
+        System.out.println("'" + itemName + "' no esta en el inventario.");
         return null;
     }
 
     public Item getFirst() {
         if (head == null) {
-            System.out.println("El inventario está vacío.");
+            System.out.println("El inventario esta vacio.");
             return null;
         }
         return head.item;
@@ -74,11 +74,11 @@ public class LinkedList {
 
     public boolean remove(String itemName) {
         if (head == null) {
-            System.out.println("El inventario está vacío.");
+            System.out.println("El inventario esta vacio.");
             return false;
         }
 
-        // caso: el item está en la cabeza
+        // caso: el item esta en la cabeza
         if (head.item.getName().equalsIgnoreCase(itemName)) {
             head = head.next;
             size--;
@@ -104,7 +104,7 @@ public class LinkedList {
 
     public Item removeFirst() {
         if (head == null) {
-            System.out.println("El inventario está vacío.");
+            System.out.println("El inventario esta vacio.");
             return null;
         }
         Item item = head.item;
@@ -117,7 +117,7 @@ public class LinkedList {
 
     public void print() {
         if (head == null) {
-            System.out.println("  (inventario vacío)");
+            System.out.println("  (inventario vacio)");
             return;
         }
         Node current = head;

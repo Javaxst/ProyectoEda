@@ -19,7 +19,7 @@ public class Queue {
     // ── ATRIBUTOS ──────────────────────────────────────────────────────────────
 
     private Node front; // primer elemento (siguiente en salir)
-    private Node rear;  // último elemento  (último en entrar)
+    private Node rear;  // ultimo elemento  (ultimo en entrar)
     private int  size;
 
     public Queue() {
@@ -44,19 +44,19 @@ public class Queue {
 
     public Object dequeue() {
         if (isEmpty()) {
-            System.out.println("La cola está vacía.");
+            System.out.println("La cola esta vacia.");
             return null;
         }
         Object data = front.data;
         front       = front.next;
-        if (front == null) rear = null; // la cola quedó vacía
+        if (front == null) rear = null; // la cola quedó vacia
         size--;
         return data;
     }
 
     public Object peek() {
         if (isEmpty()) {
-            System.out.println("La cola está vacía.");
+            System.out.println("La cola esta vacia.");
             return null;
         }
         return front.data;
@@ -66,10 +66,10 @@ public class Queue {
 
     public void print() {
         if (isEmpty()) {
-            System.out.println("  (cola vacía)");
+            System.out.println("  (cola vacia)");
             return;
         }
-        System.out.println("╔══ Cola de misiones (frente → final) ════════");
+        System.out.println("=== Cola de misiones (frente --> final) =======");
         Node current = front;
         int  index   = 1;
         while (current != null) {
@@ -82,7 +82,7 @@ public class Queue {
             current = current.next;
             index++;
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     // ── UTILIDADES ─────────────────────────────────────────────────────────────

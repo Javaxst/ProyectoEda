@@ -57,15 +57,15 @@ public class NPC extends Entity {
         shop.print();
     }
 
-    // Los NPCs no reciben daño real
+    // Los NPCs no reciben dano real
     @Override
     public void takeDamage(int damage) {
-        System.out.println(name + " te mira con decepción...");
+        System.out.println(name + " te mira con decepcion...");
     }
 
     @Override
     public String getStats() {
-        return String.format("[ %s ] Rol: %s  Tienda: %s", name, role, hasShop ? "Sí" : "No");
+        return String.format("[ %s ] Rol: %s  Tienda: %s", name, role, hasShop ? "Si" : "No");
     }
 
     public boolean hasShop()  { return hasShop; }

@@ -30,11 +30,11 @@ public class MapSystem {
         int aldea    = worldMap.addZone(new Zone(
             "Aldea Inicial",   "Un pueblo tranquilo rodeado de campos.",   Zone.ZoneType.TOWN,      1));
         int bosque   = worldMap.addZone(new Zone(
-            "Bosque Oscuro",   "Árboles densos. Se escuchan crujidos.",    Zone.ZoneType.FIELD,     2));
+            "Bosque Oscuro",   "Arboles densos. Se escuchan crujidos.",    Zone.ZoneType.FIELD,     2));
         int cueva    = worldMap.addZone(new Zone(
-            "Cueva del Norte", "Húmeda y fría. Huele a azufre.",           Zone.ZoneType.DUNGEON,   4));
+            "Cueva del Norte", "Humeda y fria. Huele a azufre.",           Zone.ZoneType.DUNGEON,   4));
         int ruinas   = worldMap.addZone(new Zone(
-            "Ruinas Antiguas", "Restos de una civilización olvidada.",     Zone.ZoneType.DUNGEON,   6));
+            "Ruinas Antiguas", "Restos de una civilizacion olvidada.",     Zone.ZoneType.DUNGEON,   6));
         int mercado  = worldMap.addZone(new Zone(
             "Mercado del Sur", "Bullicioso. Hay comerciantes por doquier.",Zone.ZoneType.SHOP,      1));
         int fortaleza= worldMap.addZone(new Zone(
@@ -75,7 +75,7 @@ public class MapSystem {
         System.out.println("\n[ Viajaste a: " + zone.getName() + " ]");
         System.out.println("  " + zone.getDescription());
 
-        logEvent("Viajó a " + zone.getName(), EventType.MOVEMENT, null);
+        logEvent("Viajo a " + zone.getName(), EventType.MOVEMENT, null);
         return true;
     }
 
@@ -113,32 +113,32 @@ public class MapSystem {
         System.out.println("──────────────────────────────────────────────");
     }
 
-    // ── MAPA Y EXPLORACIÓN ─────────────────────────────────────────────────────
+    // ── MAPA Y Exploracion ─────────────────────────────────────────────────────
 
     public void printMap() {
         worldMap.print();
     }
 
     public void printMapVisual() {
-        System.out.println("\n╔══ Mapa del mundo ════════════════════════════");
+        System.out.println("\n=== Mapa del mundo =========================══════");
         for (int i = 0; i < worldMap.getSize(); i++) {
             Zone   zone    = worldMap.getZone(i);
-            String current = (i == currentZoneIndex) ? " ◄ AQUÍ" : "";
+            String current = (i == currentZoneIndex) ? " <-- AQUI" : "";
             String visited = zone.isVisited() ? "✓" : "?";
             System.out.printf("║  [%s] %-20s Nv.%-3d  %s%s%n",
                 visited, zone.getName(), zone.getRecommendedLevel(),
                 zone.getType(), current);
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==============================================");
     }
 
     public void exploreFromCurrent() {
-        System.out.println("\n── Exploración BFS desde " + getCurrentZone().getName());
+        System.out.println("\n── Exploracion BFS desde " + getCurrentZone().getName());
         worldMap.bfs(currentZoneIndex);
     }
 
     public void showShortestPaths() {
-        System.out.println("\n── Rutas más cortas desde " + getCurrentZone().getName());
+        System.out.println("\n── Rutas mas cortas desde " + getCurrentZone().getName());
         worldMap.dijkstra(currentZoneIndex);
     }
 

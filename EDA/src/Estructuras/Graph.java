@@ -6,7 +6,7 @@ public class Graph {
     // ── NODO DE ADYACENCIA (lista de conexiones) ───────────────────────────────
 
     private static class AdjNode {
-        int     zoneIndex; // índice de la zona destino
+        int     zoneIndex; // Indice de la zona destino
         int     weight;    // costo de desplazamiento (distancia, dificultad, etc.)
         AdjNode next;
 
@@ -35,14 +35,14 @@ public class Graph {
 
     public int addZone(Zone zone) {
         if (size == capacity) {
-            System.out.println("Grafo lleno. No se pueden agregar más zonas.");
+            System.out.println("Grafo lleno. No se pueden agregar mas zonas.");
             return -1;
         }
         zones[size]   = zone;
         adjList[size] = null;
         int index     = size;
         size++;
-        return index; // devuelve el índice asignado
+        return index; // devuelve el Indice asignado
     }
 
     public Zone getZone(int index) {
@@ -60,16 +60,16 @@ public class Graph {
 
     // ── GESTIÓN DE CONEXIONES (aristas) ───────────────────────────────────────
 
-    // Conexión dirigida: desde → hasta
+    // Conexion dirigida: desde --> hasta
     public void addEdge(int fromIndex, int toIndex, int weight) {
         if (!isValidIndex(fromIndex) || !isValidIndex(toIndex)) return;
 
-        // verifica que la conexión no exista ya
+        // verifica que la Conexion no exista ya
         AdjNode current = adjList[fromIndex];
         while (current != null) {
             if (current.zoneIndex == toIndex) {
-                System.out.println("Conexión ya existe: " +
-                    zones[fromIndex].getName() + " → " + zones[toIndex].getName());
+                System.out.println("Conexion ya existe: " +
+                    zones[fromIndex].getName() +  " --> " + zones[toIndex].getName());
                 return;
             }
             current = current.next;
@@ -80,7 +80,7 @@ public class Graph {
         adjList[fromIndex]    = newNode;
     }
 
-    // Conexión bidireccional (la más común en el mapa del RPG)
+    // Conexion bidireccional (la mas común en el mapa del RPG)
     public void addBiEdge(int fromIndex, int toIndex, int weight) {
         addEdge(fromIndex, toIndex, weight);
         addEdge(toIndex, fromIndex, weight);
@@ -109,10 +109,10 @@ public class Graph {
         visited[startIndex]  = true;
         queue[rear++]        = startIndex;
 
-        System.out.println("╔══ BFS desde: " + zones[startIndex].getName() + " ══════════════");
+        System.out.println("==== BFS desde: " + zones[startIndex].getName() + " ==========");
         while (front < rear) {
             int     current = queue[front++];
-            System.out.println("║  Visitando: " + zones[current].getName());
+            System.out.println("  Visitando: " + zones[current].getName());
 
             AdjNode adj = adjList[current];
             while (adj != null) {
@@ -123,22 +123,22 @@ public class Graph {
                 adj = adj.next;
             }
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("=====================================");
     }
 
-    // ── DFS — exploración profunda desde un origen ─────────────────────────────
+    // ── DFS — Exploracion profunda desde un origen ─────────────────────────────
 
     public void dfs(int startIndex) {
         if (!isValidIndex(startIndex)) return;
         boolean[] visited = new boolean[size];
-        System.out.println("╔══ DFS desde: " + zones[startIndex].getName() + " ══════════════");
+        System.out.println("=== DFS desde: " + zones[startIndex].getName() + " =========");
         dfsRecursive(startIndex, visited);
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("==================================");
     }
 
     private void dfsRecursive(int index, boolean[] visited) {
         visited[index] = true;
-        System.out.println("║  Visitando: " + zones[index].getName());
+        System.out.println("  Visitando: " + zones[index].getName());
         AdjNode current = adjList[index];
         while (current != null) {
             if (!visited[current.zoneIndex]) {
@@ -148,7 +148,7 @@ public class Graph {
         }
     }
 
-    // ── RUTA MÁS CORTA — Dijkstra ─────────────────────────────────────────────
+    // ── RUTA mas CORTA — Dijkstra ─────────────────────────────────────────────
 
     public void dijkstra(int startIndex) {
         if (!isValidIndex(startIndex)) return;
@@ -185,17 +185,17 @@ public class Graph {
         }
 
         // imprime resultados
-        System.out.println("╔══ Dijkstra desde: " + zones[startIndex].getName() + " ══════════");
+        System.out.println("=== Dijkstra desde: " + zones[startIndex].getName() + " =======");
         for (int i = 0; i < size; i++) {
             if (dist[i] == Integer.MAX_VALUE) {
-                System.out.println("║  " + zones[i].getName() + ": inalcanzable");
+                System.out.println("  " + zones[i].getName() + ": inalcanzable");
             } else {
-                System.out.print("║  " + zones[i].getName() + " (costo:" + dist[i] + ")  ruta: ");
+                System.out.print("  " + zones[i].getName() + " (costo:" + dist[i] + ")  ruta: ");
                 printPath(prev, i);
                 System.out.println();
             }
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("====================================");
     }
 
     private void printPath(int[] prev, int index) {
@@ -204,15 +204,15 @@ public class Graph {
             return;
         }
         printPath(prev, prev[index]);
-        System.out.print(" → " + zones[index].getName());
+        System.out.print(" --> " + zones[index].getName());
     }
 
     // ── IMPRESIÓN DEL MAPA ─────────────────────────────────────────────────────
 
     public void print() {
-        System.out.println("╔══ Mapa del mundo (" + size + " zonas) ═══════════════");
+        System.out.println("=== Mapa del mundo (" + size + " zonas) =============");
         for (int i = 0; i < size; i++) {
-            System.out.print("║  [" + i + "] " + zones[i].getName() + "  →  ");
+            System.out.print("  [" + i + "] " + zones[i].getName() + "  -->  ");
             AdjNode current = adjList[i];
             if (current == null) {
                 System.out.print("(sin conexiones)");
@@ -225,14 +225,14 @@ public class Graph {
             }
             System.out.println();
         }
-        System.out.println("╚═════════════════════════════════════════════");
+        System.out.println("======================================");
     }
 
     // ── UTILIDADES ─────────────────────────────────────────────────────────────
 
     private boolean isValidIndex(int index) {
         if (index < 0 || index >= size) {
-            System.out.println("Índice de zona " + index + " inválido.");
+            System.out.println("Indice de zona " + index + " invalido.");
             return false;
         }
         return true;
